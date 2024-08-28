@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TheMovies.Commands;
@@ -14,7 +15,10 @@ namespace TheMovies.ViewModel
         private string _tbTitleText;
         private string _tbDurationText;
         private string _tbGenreText;
-        private int _lsSelectedIndex;       
+        private int _lsSelectedIndex;     
+        
+        public string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        
 
         public string tbTitleText
         {
@@ -87,14 +91,15 @@ namespace TheMovies.ViewModel
         //Constructor
         public MainViewModel()
         {
+            string databasePath = Path.Combine(projectDirectory, "Database/Database.csv");
             MovieRepo = new MovieRepository();
             CinemaRepo = new CinemaRepository();
             ProList = new ProgramList();
             ShowRepo = new ShowRepository();
             RoomRepo = new RoomRepository();
             BookingRepo = new BookingRepository();
-            MovieRepo.AddMoviesFromList("Uge33-TheMovies.csv");
-            ShowRepo.AddShowsFromList("Uge33-TheMovies.csv");
+            MovieRepo.AddMoviesFromList(databasePath);
+            ShowRepo.AddShowsFromList(databasePath);
             Movies = MovieRepo.Movies;
             Cinemas = CinemaRepo.Cinemas;
             Bookings = BookingRepo.Bookings;
