@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TheMovies.Model;
 using TheMovies.ViewModel;
 
 namespace TheMovies.Commands
 {
-    internal class AddBookingCommand : ICommand
+    internal class RemoveBookingCommand : ICommand
     {
+
         public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
@@ -19,24 +19,24 @@ namespace TheMovies.Commands
 
         public bool CanExecute(object? parameter)
         {
+            bool result = true;
+
             if (parameter is MainViewModel mvm)
             {
-                return mvm.SelectedShow != null &&
-                       mvm.tbReservedSeats != 0 &&
-                       mvm.tbPhone > 10000000 &&
-                       mvm.tbPhone < 99999999 &&
-                       !string.IsNullOrEmpty(mvm.tbEmail);
+                if (mvm.SelectedBooking == null)
+                    result = false;
             }
-            return false;
+
+            CommandManager.InvalidateRequerySuggested();
+
+            return result;
         }
 
         public void Execute(object? parameter)
         {
-            //Needs to calculate the duration of the show
-
             if (parameter is MainViewModel mvm)
             {
-                mvm.BookingRepo.AddBooking(new Booking(mvm.tbReservedSeats));
+                mvm.BookingRepo.RemoveBooking(mvm.SelectedBooking);
             }
         }
     }

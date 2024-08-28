@@ -67,6 +67,11 @@ namespace TheMovies.ViewModel
         public string SelectedRoom { get; set; }
         public string tbTimeOfShowText { get; set; }
         public Show SelectedShow { get; set; }
+        public int tbReservedSeats { get; set; }
+        public int tbPhone { get; set; }
+        public string tbEmail { get; set; }
+        public Booking SelectedBooking { get; set; }
+
 
         //ObservableCollections
         public ObservableCollection<Movie> Movies { get; set; }
@@ -87,6 +92,8 @@ namespace TheMovies.ViewModel
         public ICommand RemoveCmd { get; set; }
         public ICommand AddShowCmd { get; set; }
         public ICommand RemoveShowCmd { get; set; }
+        public ICommand AddBookingCmd { get; set; }
+        public ICommand RemoveBookingCmd { get; set; }
 
         //Constructor
         public MainViewModel()
@@ -110,6 +117,9 @@ namespace TheMovies.ViewModel
             RemoveCmd = new RemoveCommand();
             AddShowCmd = new AddShowCommand();
             RemoveShowCmd = new RemoveShowCommand();
+            AddBookingCmd = new AddBookingCommand();
+            RemoveBookingCmd = new RemoveBookingCommand();
+
 
             //Testing
             FilteredMovies = new ObservableCollection<Movie>(
