@@ -75,9 +75,6 @@ namespace TheMovies.ViewModel
 
         public ObservableCollection<Booking> Bookings { get; set; }
 
-        //Testing
-        public ObservableCollection<Movie> FilteredMovies { get; set; }
-
         //ICommands
         public ICommand AddCmd { get; set; }
         public ICommand RemoveCmd { get; set; }
@@ -89,7 +86,6 @@ namespace TheMovies.ViewModel
         {
             MovieRepo = new MovieRepository();
             CinemaRepo = new CinemaRepository();
-            ProList = new ProgramList();
             ShowRepo = new ShowRepository();
             RoomRepo = new RoomRepository();
             BookingRepo = new BookingRepository();
@@ -98,22 +94,15 @@ namespace TheMovies.ViewModel
             Movies = MovieRepo.Movies;
             Cinemas = CinemaRepo.Cinemas;
             Bookings = BookingRepo.Bookings;
-            //Shows = ProList.Shows;
             Shows = ShowRepo.Shows;
             Rooms = RoomRepo.Rooms;
             AddCmd = new AddCommand();
             RemoveCmd = new RemoveCommand();
             AddShowCmd = new AddShowCommand();
             RemoveShowCmd = new RemoveShowCommand();
-
-            //Testing
-            FilteredMovies = new ObservableCollection<Movie>(
-                Movies.GroupBy(x => x.Title).Select(x => x.First())   
-            );
         }
 
         public MovieRepository MovieRepo;
-        public ProgramList ProList;
         public ShowRepository ShowRepo;
         public CinemaRepository CinemaRepo;
         public RoomRepository RoomRepo;
