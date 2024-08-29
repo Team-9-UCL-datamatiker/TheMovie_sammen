@@ -16,7 +16,8 @@ namespace TheMovies.Persistence
         public BookingRepository()
         {
             Bookings = new ObservableCollection<Booking>();
-            Bookings.Add(new Booking(12));
+            //Bookings.Add(new Booking(12));
+            Bookings.Add(new Booking(12, new Show("Hjerm", "10", "I, Tonya", "123", "123"), new Customer("24974635", "alborde@yahoo.com")));
         }
 
         public void AddBooking(Booking booking)
