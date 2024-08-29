@@ -36,7 +36,9 @@ namespace TheMovies.Commands
 
             if (parameter is MainViewModel mvm)
             {
-                mvm.BookingRepo.AddBooking(new Booking(mvm.tbReservedSeats));
+                Customer newCustomer = new Customer(mvm.tbPhone.ToString(), mvm.tbEmail);
+                Booking newBooking = new Booking(mvm.tbReservedSeats, mvm.SelectedShow, newCustomer);
+                mvm.BookingRepo.AddBooking(newBooking);
             }
         }
     }

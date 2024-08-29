@@ -98,33 +98,45 @@
                         Margin="10,10,10,10"
                         SelectedIndex="{Binding Path=lsSelectedIndex}"
                         ItemsSource="{Binding Movies}"
-                        Grid.ColumnSpan="2" />
+                        Grid.ColumnSpan="2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Duration, StringFormat='Varighed: {0}'}"/>
+                                <TextBlock Text="{Binding Genre, StringFormat='Genre: {0}'}"/>
+                                <TextBlock Text="{Binding Director, StringFormat='Instruktør: {0}'}"/>
+                                <TextBlock Text="{Binding PremierDate, StringFormat='Premiere Dato: {0}'}"/>
+                                </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </TabItem>
             <TabItem
                 Header="Booking Liste">
                 <Grid
              Background="#FFE5E5E5">
-             <Grid.ColumnDefinitions>
-                 <ColumnDefinition
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
                      Width="83*" />
-                 <ColumnDefinition
+                        <ColumnDefinition
                      Width="269*" />
-                 <ColumnDefinition
+                        <ColumnDefinition
                      Width="352*" />
-             </Grid.ColumnDefinitions>
-             <Grid
+                    </Grid.ColumnDefinitions>
+                    <Grid
                  Grid.Column="3">
-                 <Grid.RowDefinitions>
-                     <RowDefinition
+                        <Grid.RowDefinitions>
+                            <RowDefinition
                          Height="1*" />
-                     <RowDefinition
+                            <RowDefinition
                          Height="5*" />
-                 </Grid.RowDefinitions>
-                 <StackPanel
+                        </Grid.RowDefinitions>
+                        <StackPanel
                      Orientation="Horizontal"
                      Margin="0,10,0,0">
-                     <Button
+                            <Button
                          Content="Tilføj Booking"
                          Margin="0,0,5,0"
                          HorizontalAlignment="Left"
@@ -133,14 +145,14 @@
                          Width="110"
                          Command="{Binding AddBookingCmd}"
                          CommandParameter="{Binding}" />
-                     <Button
+                            <Button
                          Content="Opdatér Booking"
                          Margin="0,0,5,0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
                          Height="50"
                          Width="110" />
-                     <Button
+                            <Button
                          Content="Slet Booking"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
@@ -148,46 +160,57 @@
                          Width="110"
                          Command="{Binding RemoveBookingCmd}"
                          CommandParameter="{Binding}" />
-                 </StackPanel>
-                 <StackPanel
+                        </StackPanel>
+                        <StackPanel
                      Grid.Row="1">
-                     <Label
+                            <Label
                          Content="Forestilling" />
-                                <ComboBox
+                            <ComboBox
                                     Name="cbShow"
                                     SelectedItem="{Binding SelectedShow}"
                                     ItemsSource="{Binding Shows}"
                                     Margin="0,5,10,10" />
-                                <Label
+                            <Label
                          Content="Antal pladser" />
-                                <Label Content=""/>
-                                <TextBlock />
-                                <TextBox
+                            <Label Content=""/>
+                            <TextBlock />
+                            <TextBox
                          Name="tbSeats"
                          Margin="0,5,10,10"
                          Text="{Binding Path=tbReservedSeats, UpdateSourceTrigger=PropertyChanged}" />
-                     <Label
+                            <Label
                          Content="Telefon nr." />
-                     <TextBox
+                            <TextBox
                          Name="tbPhone"
                          Margin="0,5,10,10"
                          Text="{Binding Path=tbPhone, UpdateSourceTrigger=PropertyChanged}" />
-                     <Label
+                            <Label
                          Content="Mailadresse" />
-                                <TextBox
+                            <TextBox
                                     Name="tbMailAddress"
                                     Margin="0,5,10,10"
                                     Text="{Binding Path=tbEmail, UpdateSourceTrigger=PropertyChanged}" />
-                            </StackPanel>
-             </Grid>
-             <ListBox
+                        </StackPanel>
+                    </Grid>
+                    <ListBox
                  Name="lbBookings"
                  Margin="10,10,10,10"
                  SelectedIndex="{Binding Path=lsSelectedIndex}"
                  SelectedItem="{Binding SelectedBooking}"
                  ItemsSource="{Binding Bookings}"
-                 Grid.ColumnSpan="2" />
-         </Grid>
+                 Grid.ColumnSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding BookedShow.MovieName}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding ReservedSeats, StringFormat='Reserved Seats: {0}'}"/>
+                                    <TextBlock Text="{Binding Customer.PhoneNumber, StringFormat='Phone: {0}'}"/>
+                                    <TextBlock Text="{Binding Customer.Mail, StringFormat='Email: {0}'}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
                 </TabItem>
                 <TabItem
                     Header="Forestillings Liste">

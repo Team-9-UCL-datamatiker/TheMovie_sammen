@@ -23,12 +23,11 @@ namespace TheMovies.Model
             ReservedSeats = resevedSeats;
             BookedShow = bookedShow;
             Customer = customer;
-            //BookedShow.AvailableSeats -= ReservedSeats;
         }
 
         public override string ToString()
         {
-            return $"{BookedShow.MovieName}, {ReservedSeats}, {Customer.PhoneNumber}";
+            return $"{BookedShow.MovieName}, {ReservedSeats}, {Customer.PhoneNumber}, {Customer.Mail}";
         }
     }
 }
