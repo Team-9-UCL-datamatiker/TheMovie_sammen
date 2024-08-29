@@ -33,21 +33,45 @@ namespace TheMovies.Persistence
             //implementation
         }
 
+        //public void AddMoviesFromList(string filename)
+        //{
+        //    StreamReader sr = new StreamReader(filename);
+        //    string line = sr.ReadLine();
+
+        //    while (line != null)
+        //    {
+        //        //int pack = 0;
+        //        string[] words = line.Split(';');
+        //        AddMovie(new Movie(words[3], words[5], words[4], words[6], words[7]));
+
+        //        line = sr.ReadLine();
+        //    }
+
+        //    sr.Close();
+        //}
+
         public void AddMoviesFromList(string filename)
         {
-            StreamReader sr = new StreamReader(filename);
-            string line = sr.ReadLine();
+            string line;
 
-            while (line != null)
+            using (StreamReader sr = new StreamReader(filename))
             {
-                //int pack = 0;
-                string[] words = line.Split(';');
-                AddMovie(new Movie(words[3], words[5], words[4], words[6], words[7]));
+                //Reads and ignores the headerline
+                string headerLine = sr.ReadLine();
 
-                line = sr.ReadLine();
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] words = line.Split(';');
+
+                    string title = words[3];
+
+                    //Only if a movie with the given title doesn't exist - add the movie to the collection
+                    if (!Movies.Any(x => x.Title == title))
+                    {
+                        AddMovie(new Movie(words[3], words[5], words[4], words[6], words[7]));
+                    }                                       
+                }
             }
-
-            sr.Close();
         }
     }
 }
