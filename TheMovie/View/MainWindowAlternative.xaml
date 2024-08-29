@@ -169,7 +169,18 @@
                                     Name="cbShow"
                                     SelectedItem="{Binding SelectedShow}"
                                     ItemsSource="{Binding Shows}"
-                                    Margin="0,5,10,10" />
+                                    Margin="0,5,10,10">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="{Binding MovieName}" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding CinemaName}" />
+                                            <TextBlock Text="{Binding RoomNumber}" />
+                                            <TextBlock Text="{Binding TimeOfShow}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                             <Label
                          Content="Antal pladser" />
                             <Label Content=""/>
@@ -292,8 +303,21 @@
                             SelectedItem="{Binding SelectedShow}"
                             ItemsSource="{Binding Shows}"
                             Grid.Column="0"
-                            Margin="6,10,10,10" />
-                    </Grid>
+                            Margin="6,10,10,10">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding TimeOfShow, StringFormat='Tidspunkt: {0}'}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding CinemaName, StringFormat='Biograf: {0}'}"/>
+                                    <TextBlock Text="{Binding RoomNumber, StringFormat='Sal: {0}'}"/>
+                                    <TextBlock Text="{Binding MovieName, StringFormat='Film: {0}'}"/>
+                                    <TextBlock Text="{Binding ShowLength, StringFormat='Spilletid: {0}'}"/>
+                                    
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </TabItem>
         </TabControl>
 
