@@ -11,40 +11,40 @@ namespace TheMovies.ViewModel
 {
     internal class MainViewModel : INotifyPropertyChanged
     {
-        private string _tbTitleText;
-        private string _tbDurationText;
-        private string _tbGenreText;
-        private int _lsSelectedIndex;       
+        //private string _tbTitleText;
+        //private string _tbDurationText;
+        //private string _tbGenreText;
+        private int _lsSelectedIndex;
 
-        public string tbTitleText
-        {
-            get => _tbTitleText;
-            set
-            {
-                _tbTitleText = value;
-                OnPropertyChanged(nameof(tbTitleText));
-            }
-        }
+        //public string tbTitleText
+        //{
+        //    get => _tbTitleText;
+        //    set
+        //    {
+        //        _tbTitleText = value;
+        //        OnPropertyChanged(nameof(tbTitleText));
+        //    }
+        //}
 
-        public string tbDurationText
-        {
-            get => _tbDurationText;
-            set
-            {
-                _tbDurationText = value;
-                OnPropertyChanged(nameof(tbDurationText));
-            }
-        }
+        //public string tbDurationText
+        //{
+        //    get => _tbDurationText;
+        //    set
+        //    {
+        //        _tbDurationText = value;
+        //        OnPropertyChanged(nameof(tbDurationText));
+        //    }
+        //}
 
-        public string tbGenreText
-        {
-            get => _tbGenreText;
-            set
-            {
-                _tbGenreText = value;
-                OnPropertyChanged(nameof(tbGenreText));
-            }
-        }
+        //public string tbGenreText
+        //{
+        //    get => _tbGenreText;
+        //    set
+        //    {
+        //        _tbGenreText = value;
+        //        OnPropertyChanged(nameof(tbGenreText));
+        //    }
+        //}
 
         public int lsSelectedIndex
         {
@@ -56,16 +56,46 @@ namespace TheMovies.ViewModel
             }
         }
 
-        public string tbDirectorText { get; set; }
-        public string tbPremierDateText { get; set; }
+        //public string tbDirectorText { get; set; }
+        //public string tbPremierDateText { get; set; }
         public string SelectedCinema { get; set; }
-        public string SelectedMovie { get; set; }
+        //public Movie SelectedMovie { get; set; }
         public string SelectedRoom { get; set; }
         public string tbTimeOfShowText { get; set; }
         public Show SelectedShow { get; set; }
 
+        //Testing
+        private Movie selectedMovie;
+        public Movie SelectedMovie
+        {
+            get { return selectedMovie; }
+            set
+            {
+                if (selectedMovie != value)
+                {
+                    selectedMovie = value;
+                    OnPropertyChanged(nameof(SelectedMovie));
+                }
+            }
+        }
+
+        //Testing
+        private ObservableCollection<Movie> movies;
+        public ObservableCollection<Movie> Movies
+        {
+            get { return movies; }
+            set
+            {
+                if (movies != value)
+                {
+                    movies = value;
+                    OnPropertyChanged(nameof(Movies));
+                }
+            }
+        }
+
         //ObservableCollections
-        public ObservableCollection<Movie> Movies { get; set; }
+        //public ObservableCollection<Movie> Movies { get; set; }
 
         public ObservableCollection<Cinema> Cinemas { get; set; }
 

@@ -23,7 +23,7 @@ namespace TheMovies.Commands
             {
                 return !string.IsNullOrEmpty(mvm.SelectedCinema) &&
                        !string.IsNullOrEmpty(mvm.SelectedRoom) &&
-                       !string.IsNullOrEmpty(mvm.SelectedMovie) &&
+                       !string.IsNullOrEmpty(mvm.SelectedMovie.Title) &&
                        !string.IsNullOrEmpty(mvm.tbTimeOfShowText);
             }
             return false;
@@ -35,7 +35,8 @@ namespace TheMovies.Commands
             
             if (parameter is MainViewModel mvm)
             {
-                string movieTitle = mvm.SelectedMovie.Split(',')[0];
+                string movieTitle = mvm.SelectedMovie.Title;
+                //string movieTitle = mvm.SelectedMovie.Title.Split(',')[0];
                 string showDuration;
                 mvm.ShowRepo.AddShow(new Show(mvm.SelectedCinema, mvm.SelectedRoom, movieTitle, mvm.tbTimeOfShowText, "2 timer"));
             }

@@ -66,31 +66,31 @@
                             <TextBox
                                 Name="tbTitle"
                                 Margin="0,5,10,10"
-                                Text="{Binding Path=tbTitleText, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding SelectedMovie.Title, UpdateSourceTrigger=PropertyChanged}" />
                             <Label
                                 Content="Varighed" />
                             <TextBox
                                 Name="tbDuration"
                                 Margin="0,5,10,10"
-                                Text="{Binding Path=tbDurationText, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding SelectedMovie.Duration, UpdateSourceTrigger=PropertyChanged}" />
                             <Label
                                 Content="Genre" />
                             <TextBox
                                 Name="tbGenre"
                                 Margin="0,5,10,10"
-                                Text="{Binding Path=tbGenreText, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding SelectedMovie.Genre, UpdateSourceTrigger=PropertyChanged}" />
                             <Label
                                 Content="Instruktør" />
                             <TextBox
                                 Name="tbDirector"
                                 Margin="0,5,10,10"
-                                Text="{Binding Path=tbDirectorText, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding SelectedMovie.Director, UpdateSourceTrigger=PropertyChanged}" />
                             <Label
                                 Content="Premieredato" />
                             <TextBox
                                 Name="tbPremierDate"
                                 Margin="0,5,10,10"
-                                Text="{Binding Path=tbPremierDateText, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding SelectedMovie.PremierDate, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </Grid>
                     <ListBox
@@ -98,6 +98,7 @@
                         Margin="10,10,10,10"
                         SelectedIndex="{Binding Path=lsSelectedIndex}"
                         ItemsSource="{Binding Movies}"
+                        SelectedItem="{Binding SelectedMovie}"
                         Grid.ColumnSpan="2" />
                 </Grid>
             </TabItem>

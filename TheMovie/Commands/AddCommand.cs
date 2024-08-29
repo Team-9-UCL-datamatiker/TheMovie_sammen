@@ -25,11 +25,14 @@ namespace TheMovies.Commands
             // Example condition: Add command can only execute if text fields are not null or empty
             if (parameter is MainViewModel mvm)
             {
-                return !string.IsNullOrEmpty(mvm.tbTitleText) &&
-                       !string.IsNullOrEmpty(mvm.tbDurationText) &&
-                       !string.IsNullOrEmpty(mvm.tbGenreText) &&
-                       !string.IsNullOrEmpty(mvm.tbDirectorText) &&
-                       !string.IsNullOrEmpty(mvm.tbPremierDateText);
+                if (mvm.SelectedMovie == null)
+                    return false;
+                
+                return !string.IsNullOrEmpty(mvm.SelectedMovie.Title) &&
+                       !string.IsNullOrEmpty(mvm.SelectedMovie.Duration) &&
+                       !string.IsNullOrEmpty(mvm.SelectedMovie.Genre) &&
+                       !string.IsNullOrEmpty(mvm.SelectedMovie.Director) &&
+                       !string.IsNullOrEmpty(mvm.SelectedMovie.PremierDate);
             }
             return false;
         }
@@ -38,14 +41,7 @@ namespace TheMovies.Commands
         {
             if (parameter is MainViewModel mvm)
             {
-                try 
-                {
-                    mvm.MovieRepo.AddMovie(new Movie(mvm.tbTitleText,mvm.tbDurationText,mvm.tbGenreText, mvm.tbDirectorText, mvm.tbPremierDateText));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                mvm.MovieRepo.AddMovie(new Movie(mvm.SelectedMovie.Title,mvm.SelectedMovie.Duration, mvm.SelectedMovie.Genre, mvm.SelectedMovie.Director, mvm.SelectedMovie.PremierDate));
             }
         }
     }
