@@ -9,16 +9,16 @@ namespace TheMovies.Model
 {
     public class Booking
     {
-        public Show BookedShow { get; set; } = new Show(" ", " ", " ", " ", " ");
-        public Customer Customer { get; set; } = new Customer("", ""); 
-        public int ReservedSeats { get; set; }
+        public Show BookedShow { get; set; }
+        public Customer Customer { get; set; }
+        public string ReservedSeats { get; set; }
 
-        public Booking(int resevedSeats)
+        public Booking(string resevedSeats)
         {
             ReservedSeats = resevedSeats;
         }
 
-        public Booking(int resevedSeats, Show bookedShow, Customer customer)
+        public Booking(string resevedSeats, Show bookedShow, Customer customer)
         {
             ReservedSeats = resevedSeats;
             BookedShow = bookedShow;
@@ -33,9 +33,13 @@ namespace TheMovies.Model
         public static Booking Parse(string data)
         {
             var parts = data.Split(',');
-            int reservedSeats = int.Parse(parts[0]);
-            var show = Show.Parse(parts[1]);
-            var customer = Customer.Parse(parts[2]);
+
+            string reservedSeats = parts[0].Trim();
+
+            string showData = string.Join(",", parts.Skip(1).Take(5)).Trim();
+            var show = Show.Parse(showData);
+            string customerData = string.Join(",", parts.Skip(6)).Trim();
+            var customer = Customer.Parse(customerData);
 
             return new Booking(reservedSeats, show, customer);
         }

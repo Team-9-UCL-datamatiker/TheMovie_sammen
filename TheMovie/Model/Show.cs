@@ -52,6 +52,11 @@ namespace TheMovies.Model
             string timeOfShow = parts[3].Trim();
             string showLength = parts[4].Trim();
 
+            //var parts = data.Split(',');
+            //int reservedSeats = int.Parse(parts[0]);
+            //var show = Show.Parse(parts[1]);
+            //var customer = Customer.Parse(parts[2]);
+
             return new Show(cinemaName, roomNumber, movieName, timeOfShow, showLength);
         }
     }    
