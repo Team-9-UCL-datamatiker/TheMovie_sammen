@@ -27,7 +27,17 @@ namespace TheMovies.Model
 
         public override string ToString()
         {
-            return $"{BookedShow.MovieName}, {ReservedSeats}, {Customer.PhoneNumber}, {Customer.Mail}";
+            return $"{ReservedSeats},{BookedShow},{Customer}";
+        }
+
+        public static Booking Parse(string data)
+        {
+            var parts = data.Split(',');
+            int reservedSeats = int.Parse(parts[0]);
+            var show = Show.Parse(parts[1]);
+            var customer = Customer.Parse(parts[2]);
+
+            return new Booking(reservedSeats, show, customer);
         }
     }
 }

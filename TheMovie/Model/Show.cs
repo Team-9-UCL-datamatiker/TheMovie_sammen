@@ -42,5 +42,17 @@ namespace TheMovies.Model
         {
             return $"{CinemaName}, {RoomNumber}, {MovieName}, {TimeOfShow}, {ShowLength}";
         }
+
+        public static Show Parse(string data)
+        {
+            var parts = data.Split(',');
+            string cinemaName = parts[0].Trim();
+            string roomNumber = parts[1].Trim();
+            string movieName = parts[2].Trim();
+            string timeOfShow = parts[3].Trim();
+            string showLength = parts[4].Trim();
+
+            return new Show(cinemaName, roomNumber, movieName, timeOfShow, showLength);
+        }
     }    
 }

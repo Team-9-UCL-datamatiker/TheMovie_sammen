@@ -17,5 +17,18 @@ namespace TheMovies.Model
             PhoneNumber = phoneNumber;
             Mail = mail;
         }
+        public override string ToString()
+        {
+            return $"{PhoneNumber}, {Mail}";
+        }
+
+        public static Customer Parse(string data)
+        {
+            var parts = data.Split(',');
+            string phoneNumber = parts[0].Trim();
+            string mail = parts[1].Trim();
+
+            return new Customer(phoneNumber, mail);
+        }
     }
 }

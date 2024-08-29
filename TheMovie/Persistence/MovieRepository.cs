@@ -33,26 +33,30 @@ namespace TheMovies.Persistence
             //implementation
         }
 
-        public void AddMoviesFromList(string filename)
+        public void SaveToFile(string filePath)
         {
-            string line;
-
-            using (StreamReader sr = new StreamReader(filename))
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                //Reads and ignores the headerline
-                string headerLine = sr.ReadLine();
-
-                while ((line = sr.ReadLine()) != null)
+                foreach (var movie in Movies)
                 {
-                    string[] words = line.Split(';');
+                    writer.WriteLine(movie.ToString());
+                }
+            }
+        }
 
-                    string title = words[3];
+        // Load bookings from a file
+        public void LoadFromFile(string filePath)
+        {
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("The specified file could not be found.", filePath);
 
-                    //Only if a movie with the given title doesn't exist - add the movie to the collection
-                    if (!Movies.Any(x => x.Title == title))
-                    {
-                        AddMovie(new Movie(words[3], words[5], words[4], words[6], words[7]));
-                    }                                       
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var movie = Movie.Parse(line);
+                    Movies.Add(movie);
                 }
             }
         }

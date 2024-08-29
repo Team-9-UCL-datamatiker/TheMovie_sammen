@@ -34,5 +34,32 @@ namespace TheMovies.Persistence
         {
             //implementation
         }
+        public void SaveToFile(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (var booking in Bookings)
+                {
+                    writer.WriteLine(booking.ToString());
+                }
+            }
+        }
+
+        // Load bookings from a file
+        public void LoadFromFile(string filePath)
+        {
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("The specified file could not be found.", filePath);
+
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var booking = Booking.Parse(line);
+                    Bookings.Add(booking);
+                }
+            }
+        }
     }
 }

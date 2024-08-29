@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TheMovies.Commands;
@@ -95,14 +96,17 @@ namespace TheMovies.ViewModel
         //Constructor
         public MainViewModel()
         {
-            string databasePath = Path.Combine(projectDirectory, "Database/Database.csv");
+            //string databasePath = Path.Combine(projectDirectory, "Database/Database.csv");
+            string BookingPath = Path.Combine(projectDirectory, "Database/BookingDatabase.csv");
+            string MoviePath = Path.Combine(projectDirectory, "Database/MovieDatabase.csv");
+            string ShowPath = Path.Combine(projectDirectory, "Database/ShowDatabase.csv");
             MovieRepo = new MovieRepository();
             CinemaRepo = new CinemaRepository();
             ShowRepo = new ShowRepository();
             RoomRepo = new RoomRepository();
             BookingRepo = new BookingRepository();
-            MovieRepo.AddMoviesFromList(databasePath);
-            ShowRepo.AddShowsFromList(databasePath);
+            //MovieRepo.AddMoviesFromList(databasePath);
+            //ShowRepo.AddShowsFromList(databasePath);
             Movies = MovieRepo.Movies;
             Cinemas = CinemaRepo.Cinemas;
             Bookings = BookingRepo.Bookings;
@@ -114,6 +118,9 @@ namespace TheMovies.ViewModel
             RemoveShowCmd = new RemoveShowCommand();
             AddBookingCmd = new AddBookingCommand();
             RemoveBookingCmd = new RemoveBookingCommand();
+            MovieRepo.LoadFromFile(MoviePath);
+            ShowRepo.LoadFromFile(ShowPath);
+            BookingRepo.LoadFromFile(BookingPath);
 
 
             
@@ -127,9 +134,12 @@ namespace TheMovies.ViewModel
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TheMovies.Persistence;
 using TheMovies.ViewModel;
 
 namespace TheMovies.View
@@ -24,6 +25,6 @@ namespace TheMovies.View
         {
             InitializeComponent();
             DataContext = new MainViewModel();
-        }
+        }        
     }
 }

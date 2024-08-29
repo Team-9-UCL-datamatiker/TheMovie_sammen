@@ -33,18 +33,30 @@ namespace TheMovies.Persistence
             //Needs implementation
         }
 
-        public void AddShowsFromList(string filename)
+        public void SaveToFile(string filePath)
         {
-            string line;
-
-            using (StreamReader sr = new StreamReader(filename))
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                string headerLine = sr.ReadLine();
-
-                while ((line = sr.ReadLine()) != null)
+                foreach (var show in Shows)
                 {
-                    string[] words = line.Split(';');
-                    AddShow(new Show(words[0], "1", words[3], words[2], words[5]));
+                    writer.WriteLine(show.ToString());
+                }
+            }
+        }
+
+        // Load bookings from a file
+        public void LoadFromFile(string filePath)
+        {
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("The specified file could not be found.", filePath);
+
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var show = Show.Parse(line);
+                    Shows.Add(show);
                 }
             }
         }

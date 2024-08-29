@@ -18,5 +18,10 @@ namespace TheMovies.Model
         {
             return $"{Title}, {Genre}, {Duration}, {Director}, {PremierDate}";
         }
+        public static Movie Parse(string data)
+        {
+            var parts = data.Split(',');
+            return new Movie(parts[0], parts[1], parts[2], parts[3], parts[4]);
+        }
     }
 }
