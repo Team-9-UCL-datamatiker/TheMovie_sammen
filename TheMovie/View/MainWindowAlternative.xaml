@@ -19,12 +19,13 @@
                         <ColumnDefinition
                             Width="83*" />
                         <ColumnDefinition
-                            Width="269*" />
+                            Width="30*" />
+                        <ColumnDefinition Width="239*"/>
                         <ColumnDefinition
                             Width="352*" />
                     </Grid.ColumnDefinitions>
                     <Grid
-                        Grid.Column="2">
+                        Grid.Column="3">
                         <Grid.RowDefinitions>
                             <RowDefinition
                                 Height="1.2*" />
@@ -112,18 +113,18 @@
                         Margin="10,10,10,10"
                         SelectedIndex="{Binding Path=lsSelectedIndex}"
                         ItemsSource="{Binding Movies}"
-                        Grid.ColumnSpan="2">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Duration, StringFormat='Varighed: {0}'}"/>
-                                <TextBlock Text="{Binding Genre, StringFormat='Genre: {0}'}"/>
-                                <TextBlock Text="{Binding Director, StringFormat='Instruktør: {0}'}"/>
-                                <TextBlock Text="{Binding PremierDate, StringFormat='Premiere Dato: {0}'}"/>
+                        Grid.ColumnSpan="3">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Duration, StringFormat='Varighed: {0}'}"/>
+                                    <TextBlock Text="{Binding Genre, StringFormat='Genre: {0}'}"/>
+                                    <TextBlock Text="{Binding Director, StringFormat='Instruktør: {0}'}"/>
+                                    <TextBlock Text="{Binding PremierDate, StringFormat='Premiere Dato: {0}'}"/>
                                 </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
             </TabItem>
@@ -188,15 +189,15 @@
                                     Margin="0,5,10,10">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock Text="{Binding MovieName}" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding CinemaName}" />
-                                            <TextBlock Text="{Binding RoomNumber}" />
-                                            <TextBlock Text="{Binding TimeOfShow}" />
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding MovieName}" FontWeight="Bold" Margin="0,0,10,0"/>
+                                            <TextBlock Text="{Binding CinemaName, StringFormat='Biograf {0}, '}"/>
+                                            <TextBlock Text="{Binding RoomNumber, StringFormat='sal {0}. '}"/>
+                                            <TextBlock Text="{Binding TimeOfShow, StringFormat='d. {0}'}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
-                                
+
                             </ComboBox>
                             <Label
                          Content="Antal pladser" />
@@ -251,31 +252,31 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
-                </TabItem>
-                <TabItem
+            </TabItem>
+            <TabItem
                     Header="Forestillings Liste">
-                    <Grid
+                <Grid
                         Background="#FFE5E5E5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
                                 Width="*" />
-                            <ColumnDefinition
+                        <ColumnDefinition
                                 Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid
+                    </Grid.ColumnDefinitions>
+                    <Grid
                             Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition
+                        <Grid.RowDefinitions>
+                            <RowDefinition
                                     Height="1.2*" />
-                                <RowDefinition
+                            <RowDefinition
                                     Height="5*" />
                             <RowDefinition
                                     Height="1*" />
                         </Grid.RowDefinitions>
-                            <StackPanel
+                        <StackPanel
                                 Orientation="Horizontal"
                                 Margin="0,10,0,0">
-                                <Button
+                            <Button
                                     Command="{Binding AddShowCmd}"
                                     CommandParameter="{Binding}"
                                     Margin="0,0,5,0"
@@ -284,14 +285,14 @@
                                     VerticalAlignment="Top"
                                     Height="50"
                                     Width="110" />
-                                <Button
+                            <Button
                                     Margin="0,0,5,0"
                                     Content="Opdatér Forestilling"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     Height="50"
                                     Width="110" />
-                                <Button
+                            <Button
                                     Command="{Binding RemoveShowCmd}"
                                     CommandParameter="{Binding}"
                                     Content="Slet Forestilling"
@@ -299,39 +300,39 @@
                                     VerticalAlignment="Top"
                                     Height="50"
                                     Width="110" />
-                            </StackPanel>
-                            <StackPanel
+                        </StackPanel>
+                        <StackPanel
                                 Grid.Row="1">
-                                <Label
+                            <Label
                                     Content="Biograf" />
-                                <ComboBox
+                            <ComboBox
                                     Name="cbCinema"
                                     SelectedItem="{Binding SelectedCinema}"
                                     ItemsSource="{Binding Cinemas}"
                                     Margin="0,5,10,10" />
-                                <Label
+                            <Label
                                     Content="Sal" />
-                                <ComboBox
+                            <ComboBox
                                     SelectedItem="{Binding SelectedRoom}"
                                     ItemsSource="{Binding Rooms}"
                                     Margin="0,5,10,10" />
-                                <Label
+                            <Label
                                     Content="Film" />
-                                <ComboBox
+                            <ComboBox
                                     Name="cbMovie"
                                     SelectedItem="{Binding SelectedMovie}"
                                     ItemsSource="{Binding Movies}"
                                     Margin="0,5,10,10" />
-                                <Label
+                            <Label
                                     Content="Tidspunkt" />
-                                <TextBox
+                            <TextBox
                                     Name="tbTimeOfShow"
                                     Text="{Binding Path=tbTimeOfShowText, UpdateSourceTrigger=PropertyChanged}"
                                     Margin="0,5,10,10" />
-                            </StackPanel>
-                            <StackPanel
+                        </StackPanel>
+                        <StackPanel
                                 Grid.Row="2">
-                                <Button
+                            <Button
                                     Content="Gem"
                                     Margin="0,0,10,0"
                                     HorizontalAlignment="Right"
@@ -341,8 +342,8 @@
                                     Command="{Binding SaveShowsCmd}"
                                     CommandParameter="{Binding}" />
                         </StackPanel>
-                        </Grid>
-                        <ListBox
+                    </Grid>
+                    <ListBox
                             SelectedItem="{Binding SelectedShow}"
                             ItemsSource="{Binding Shows}"
                             Grid.Column="0"
@@ -355,7 +356,7 @@
                                     <TextBlock Text="{Binding RoomNumber, StringFormat='Sal: {0}'}"/>
                                     <TextBlock Text="{Binding MovieName, StringFormat='Film: {0}'}"/>
                                     <TextBlock Text="{Binding ShowLength, StringFormat='Spilletid: {0}'}"/>
-                                    
+
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
