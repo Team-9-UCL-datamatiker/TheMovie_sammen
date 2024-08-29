@@ -13,9 +13,11 @@ namespace TheMovies.Model
         public string CinemaName { get; set; }
         public string MovieName { get; set; }
         
-        public string RoomNumber { get; set; }
+        public string RoomNumber { get; set; } 
         public string TimeOfShow { get; set; }
         public string ShowLength { get; set; }
+
+        public int AvailableSeats { get; set; } = 40;
 
         public Show(string cinemaName, string roomNumber, string movieName, string time, string showLength)
         {
@@ -24,6 +26,16 @@ namespace TheMovies.Model
             MovieName = movieName;
             TimeOfShow = time;
             ShowLength = showLength;
+        }
+
+        public Show(string cinemaName, string roomNumber, string movieName, string time, string showLength, int availableSeats)
+        {
+            CinemaName = cinemaName;
+            RoomNumber = roomNumber;
+            MovieName = movieName;
+            TimeOfShow = time;
+            ShowLength = showLength;
+            AvailableSeats = availableSeats;
         }
 
         public override string ToString()
