@@ -103,7 +103,7 @@
                                 VerticalAlignment="Top"
                                 Height="50"
                                 Width="110"
-                                Command="{Binding SaveCmd}"
+                                Command="{Binding SaveMoviesCmd}"
                                 CommandParameter="{Binding}" />
                         </StackPanel>
                     </Grid>
@@ -196,6 +196,7 @@
                                         </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
+                                
                             </ComboBox>
                             <Label
                          Content="Antal pladser" />
@@ -227,7 +228,7 @@
                                 VerticalAlignment="Top"
                                 Height="50"
                                 Width="110"
-                                Command="{Binding SaveCmd}"
+                                Command="{Binding SaveBookingsCmd}"
                                 CommandParameter="{Binding}" />
                         </StackPanel>
                     </Grid>
@@ -337,7 +338,7 @@
                                     VerticalAlignment="Top"
                                     Height="50"
                                     Width="110"
-                                    Command="{Binding SaveCmd}"
+                                    Command="{Binding SaveShowsCmd}"
                                     CommandParameter="{Binding}" />
                         </StackPanel>
                         </Grid>

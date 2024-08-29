@@ -16,10 +16,12 @@ namespace TheMovies.ViewModel
         private string _tbTitleText;
         private string _tbDurationText;
         private string _tbGenreText;
-        private int _lsSelectedIndex;     
-        
-        public string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-        
+        private int _lsSelectedIndex;
+
+        public string projectDirectory;
+        public string BookingPath;
+        public string MoviePath;
+        public string ShowPath;
 
         public string tbTitleText
         {
@@ -92,14 +94,16 @@ namespace TheMovies.ViewModel
         public ICommand RemoveShowCmd { get; set; }
         public ICommand AddBookingCmd { get; set; }
         public ICommand RemoveBookingCmd { get; set; }
+        public ICommand SaveMoviesCmd { get; set; }
+        public ICommand SaveBookingsCmd { get; set; }
+        public ICommand SaveShowsCmd { get; set; }
+               
 
         //Constructor
         public MainViewModel()
         {
             //string databasePath = Path.Combine(projectDirectory, "Database/Database.csv");
-            string BookingPath = Path.Combine(projectDirectory, "Database/BookingDatabase.csv");
-            string MoviePath = Path.Combine(projectDirectory, "Database/MovieDatabase.csv");
-            string ShowPath = Path.Combine(projectDirectory, "Database/ShowDatabase.csv");
+            
             MovieRepo = new MovieRepository();
             CinemaRepo = new CinemaRepository();
             ShowRepo = new ShowRepository();
@@ -118,12 +122,18 @@ namespace TheMovies.ViewModel
             RemoveShowCmd = new RemoveShowCommand();
             AddBookingCmd = new AddBookingCommand();
             RemoveBookingCmd = new RemoveBookingCommand();
+            projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            BookingPath = Path.Combine(projectDirectory, "Database/BookingDatabase.csv");
+            MoviePath = Path.Combine(projectDirectory, "Database/MovieDatabase.csv");
+            ShowPath = Path.Combine(projectDirectory, "Database/ShowDatabase.csv");
             MovieRepo.LoadFromFile(MoviePath);
             ShowRepo.LoadFromFile(ShowPath);
             BookingRepo.LoadFromFile(BookingPath);
+            SaveShowsCmd = new RelayCommand(SaveShows);
+            SaveBookingsCmd = new RelayCommand(SaveBookings);
+            SaveMoviesCmd = new RelayCommand(SaveMovies);
 
 
-            
         }
 
         public MovieRepository MovieRepo;
@@ -134,11 +144,25 @@ namespace TheMovies.ViewModel
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+
         
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void SaveMovies()
+        {
+            MovieRepo.SaveToFile(MoviePath);
+        }
+        private void SaveBookings()
+        {
+            BookingRepo.SaveToFile(BookingPath);
+        }
+        private void SaveShows()
+        {
+            ShowRepo.SaveToFile(ShowPath);
         }
         
     }
