@@ -102,15 +102,11 @@ namespace TheMovies.ViewModel
         //Constructor
         public MainViewModel()
         {
-            //string databasePath = Path.Combine(projectDirectory, "Database/Database.csv");
-            
             MovieRepo = new MovieRepository();
             CinemaRepo = new CinemaRepository();
             ShowRepo = new ShowRepository();
             RoomRepo = new RoomRepository();
             BookingRepo = new BookingRepository();
-            //MovieRepo.AddMoviesFromList(databasePath);
-            //ShowRepo.AddShowsFromList(databasePath);
             Movies = MovieRepo.Movies;
             Cinemas = CinemaRepo.Cinemas;
             Bookings = BookingRepo.Bookings;
